@@ -2,9 +2,8 @@
 CREATE VIEW employee_salaries AS
 	SELECT e.emp_no, e.last_name, e.first_name, e.sex, s.salary
 	FROM employees AS e
-	JOIN salaries as s ON e.emp_no = s.emp_no
-SELECT * FROM employee_salaries
-	ORDER BY salary DESC;
+	JOIN salaries as s ON e.emp_no = s.emp_no;
+SELECT * FROM employee_salaries;
 
 -- 2. Employees hired in 1986
 SELECT first_name, last_name, hire_date FROM employees
@@ -23,7 +22,7 @@ CREATE VIEW employee_departments AS
 	SELECT e.emp_no, e.last_name, e.first_name, d.dept_name
 	FROM employees AS e
 		LEFT JOIN emp_dept AS ed ON e.emp_no = ed.emp_no
-		LEFT JOIN depts as d ON ed.dept_no = d.dept_no
+		LEFT JOIN depts as d ON ed.dept_no = d.dept_no;
 SELECT * FROM employee_departments
 	ORDER BY emp_no;
 
@@ -33,13 +32,15 @@ WHERE first_name = 'Hercules' AND last_name LIKE 'B%';
 
 -- 6. Employees in Sales
 SELECT * FROM employee_departments
-WHERE dept_name = 'Sales';
+WHERE dept_name = 'Sales'
+ORDER BY emp_no;
 
 -- 7. Employees in Sales and Development
 SELECT * FROM employee_departments
-WHERE dept_name = 'Sales' OR dept_name = 'Development';
+WHERE dept_name = 'Sales' OR dept_name = 'Development'
+ORDER BY emp_no;
 
 -- 8. Employee last names
 SELECT last_name, count(last_name) FROM employees
 GROUP BY last_name
-ORDER BY count(last_name) DESC;
+ORDER BY count(last_name) DESC, last_name;
